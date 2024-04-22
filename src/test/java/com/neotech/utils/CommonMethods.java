@@ -2,7 +2,9 @@ package com.neotech.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -325,21 +327,27 @@ public class CommonMethods extends BaseClass{
 	 * 
 	 * @param fileName
 	 */
-	public static void takeScreenshot(String fileName)
+	public static String takeScreenshot(String fileName)
 	{
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		
 		File source = ts.getScreenshotAs(OutputType.FILE);
+		String destination = Constants.SCREENSHOT_FILEPATH + fileName + getTimeStamp() + ".png";
 		
 		try {
-			FileUtils.copyFile(source, new File("screenshots/"+fileName+".png"));
+			FileUtils.copyFile(source, new File(destination));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Unable to save the screenshot!!!");
 		}
-		
+		return destination;
 	}
-	
+
+	public static String getTimeStamp() {
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        return simpleDateFormat.format(date);
+	}
 	
 
 }

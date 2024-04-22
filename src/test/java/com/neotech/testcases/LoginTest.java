@@ -19,6 +19,8 @@ public class LoginTest extends CommonMethods{
 	{
 		LoginPageElements login = new LoginPageElements();
 		DashboardPageElements dashboard = new DashboardPageElements();
+
+		test.info("Entering valid username and password!");
 		
 		//send username
 		sendText(login.username, ConfigsReader.getProperty("username"));
@@ -39,7 +41,7 @@ public class LoginTest extends CommonMethods{
 		
 	}
 		
-	@Test(groups="smoke")
+	@Test(groups={"smoke", "regression"})
 	public void emptyPasswordLogin()
 	{
 		
